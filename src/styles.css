@@ -1,5 +1,132 @@
+/* Download the fonts later */
+@import url('https://fonts.googleapis.com/css2?family=Josefin+Sans:ital,wght@0,100..700;1,100..700&display=swap');
+
 *{
     margin: 0;
     padding: 0;
     box-sizing: border-box;
+}
+
+.container{
+    font-family: "Josefin Sans", sans-serif;
+    display: grid;
+    width: 100vw;
+    min-height: 100vh;
+    grid-template-columns: 400px 1fr;
+}
+
+/* Nav */
+.nav{
+    background-color: rgb(205, 241, 253);
+}
+
+.user-container{
+    display: flex;
+    padding: 20px 40px;
+    background-color: rgb(116, 205, 234);
+}
+
+.user{
+    padding: 10px 15px;
+    border-radius: 5px;
+    font-weight: 600;
+    letter-spacing: 1px;
+}
+
+/* Nav - Projects */
+.projects-container{
+    padding: 40px 30px;
+}
+.projects-container h1{
+    font-weight: 200;
+    position: relative;
+}
+.projects-container h1::before{
+    content: '';
+    position: absolute;
+    bottom: -5px;
+    left: 0;
+    width: 100px;
+    height: 1px;
+    background-color: black;
+    border-radius: 5px;
+}
+
+.project,
+.addProject{
+    cursor: pointer;
+}
+.project{
+    margin: 30px 0;
+    border: 1px solid green;
+    padding: 10px;
+    border-radius: 5px;
+}
+.project:nth-child(3){
+    border: 1px solid red;
+}
+.project:nth-child(4){
+    border: 1px solid purple;
+}
+
+.addProject{
+    margin: 30px 0;
+    border: 1px solid green;
+    padding: 10px 15px;
+    border-radius: 5px;
+    letter-spacing: 10px;
+}
+
+/* Content */
+.content{
+    padding: 30px 80px;
+}
+
+.title{
+    font-weight: 400;
+    letter-spacing: 2px;
+}
+
+/* Content - Todo */
+.todo-container{
+    width: 100%;
+    min-height: 90%;
+    margin: 20px 0 0 0;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1rem;
+}
+
+.todo{
+    border: 1px solid grey;
+    border-radius: 5px;
+    width: 300px;
+    height: 300px;
+    padding: 20px;
+}
+.todo-title{
+    font-size: 1.5rem;
+    font-weight: 600;
+}
+.todo-description{
+    height: 200px;
+    margin: 15px 0;
+    line-height: 1.5rem;
+    overflow: auto;
+}
+
+.btn-new{
+    position: fixed;
+    bottom: 50px;
+    right: 40px;
+    background-color: aquamarine;
+    padding: 20px;
+    border-radius: 100px;
+    width: 50px;
+    height: 50px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 2rem;
+    font-weight: 250;
 }
