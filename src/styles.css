@@ -63,7 +63,7 @@ body{
 .project{
     margin: 30px 0;
     border: 1px solid rgb(0, 0, 0);
-    padding: 15px 15px 10px 15px;
+    padding: 15px;
     border-radius: 5px;
     box-shadow: 0 4px 4px 0 rgba(0, 0, 0, 0.25);
 }
@@ -131,6 +131,7 @@ body{
 .todo-header{
     display: flex;
     gap: 1rem;
+    align-items: center;
 }
 .todo-check{
     width: 20px;
@@ -155,6 +156,7 @@ body{
 .todo-description{
     height: 200px;
     margin: 10px 0;
+    padding-bottom: 10px;
     line-height: 1.5rem;
     overflow: auto;
 }
