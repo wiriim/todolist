@@ -101,11 +101,20 @@ body{
     gap: 1rem;
 }
 
-.todo{
+.todo.open{
     border: 1px solid grey;
     border-radius: 5px;
     width: 300px;
     height: 300px;
+    padding: 20px;
+    box-shadow: 0 4px 4px 0 rgba(0, 0, 0, 0.25);
+}
+.todo,
+.todo.closed{
+    border: 1px solid grey;
+    border-radius: 5px;
+    width: 300px;
+    height: 100px;
     padding: 20px;
     box-shadow: 0 4px 4px 0 rgba(0, 0, 0, 0.25);
 }
@@ -123,6 +132,10 @@ body{
 .todo-title{
     font-size: 1.5rem;
     font-weight: 600;
+    cursor: pointer;
+}
+.todo-title:hover{
+    text-decoration: underline;
 }
 .todo-sub-header{
     display: flex;
