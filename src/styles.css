@@ -7,6 +7,10 @@
     box-sizing: border-box;
 }
 
+body{
+    overflow-x: hidden;
+}
+
 .container{
     font-family: "Josefin Sans", sans-serif;
     display: grid;
@@ -17,13 +21,13 @@
 
 /* Nav */
 .nav{
-    background-color: rgb(205, 241, 253);
+    border: 1px solid black;    
 }
 
 .user-container{
     display: flex;
     padding: 20px 40px;
-    background-color: rgb(116, 205, 234);
+    box-shadow: 0 2px 2px 0 rgba(0, 0, 0, 0.25);
 }
 
 .user{
@@ -103,14 +107,31 @@
     width: 300px;
     height: 300px;
     padding: 20px;
+    box-shadow: 0 4px 4px 0 rgba(0, 0, 0, 0.25);
+}
+.todo-header{
+    display: flex;
+    gap: 1rem;
+}
+.todo-check{
+    width: 20px;
+    height: 20px;
+    border: 2px solid black;
+    border-radius: 100px;
+    cursor: pointer;
 }
 .todo-title{
     font-size: 1.5rem;
     font-weight: 600;
 }
+.todo-sub-header{
+    display: flex;
+    gap: 0.5rem;
+    margin: 15px 0 0 0;
+}
 .todo-description{
     height: 200px;
-    margin: 15px 0;
+    margin: 10px 0;
     line-height: 1.5rem;
     overflow: auto;
 }
