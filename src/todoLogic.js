@@ -7,6 +7,6 @@ class todo{
     }
 }
 
-export function createTodo(title, description, dueDate, priority){
+export function createTodoObject(title, description, dueDate, priority){
     return new todo(title, description, dueDate, priority);
 }
