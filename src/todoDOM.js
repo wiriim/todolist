@@ -1,3 +1,5 @@
+let todoContainer = document.querySelector('.todo-container');
+
 function createCreateTodoDOM(){
     let container = document.createElement('div');
     container.classList.add('todo', 'create');
@@ -16,6 +18,8 @@ function createCreateTodoDOM(){
         let frmCtrl = document.createElement(frmCtrlList[i]);
         frmCtrl.classList.add(frmCtrlAtr[i]);
         frmCtrl.id = frmCtrlAtr[i];
+        if (frmCtrlTxt[i] == 'Due Date')
+            frmCtrl.type = 'datetime-local';
         if (frmCtrlList[i] == 'select'){
             let optionVals = ['High', 'Medium', 'Low'];
             for (let j = 0; j < 3; j++){
@@ -42,13 +46,52 @@ function createCreateTodoDOM(){
     return container;
 }
 
-export function showCreateTodoDOM(){
-    let todoContainer = document.querySelector('.todo-container');
+function showCreateTodoDOM(){
     let container = createCreateTodoDOM();
     todoContainer.append(container);
 }
 
-export function hideCreateTodoDOM(){
+function hideCreateTodoDOM(){
     let container = document.querySelector('.todo.create');
     container.remove();
 }
+
+function createTodoItemDOM(todo){
+    let todoItemContainer = document.createElement('div');
+    todoItemContainer.classList.add('todo', 'closed');
+    let headerContainer = document.createElement('div');
+    headerContainer.classList.add('todo-header');
+    let check = document.createElement('div');
+    check.classList.add('todo-check');
+    let titleDiv = document.createElement('div');
+    titleDiv.classList.add('todo-title');
+    titleDiv.textContent = todo.title;
+    headerContainer.append(check, titleDiv);
+    let subHeaderContainer = document.createElement('div');
+    subHeaderContainer.classList.add('todo-sub-header');
+    let dueDateDiv = document.createElement('div');
+    dueDateDiv.classList.add('todo-due-date');
+    dueDateDiv.textContent = todo.dueDate.replace('T', ' ');
+    let priorityDiv = document.createElement('div');
+    priorityDiv.classList.add('todo-priority');
+    priorityDiv.textContent = todo.priority;
+    subHeaderContainer.append(dueDateDiv, priorityDiv);
+    let descContainer = document.createElement('div');
+    descContainer.classList.add('todo-description', 'd-none');
+    descContainer.textContent = todo.description;
+    todoItemContainer.append(headerContainer, subHeaderContainer, descContainer);
+
+
+    titleDiv.addEventListener('click', ()=>{
+        todoItemContainer.classList.toggle('closed');
+        descContainer.classList.toggle('d-none');
+    });
+    return todoItemContainer;
+}
+
+function addTodoItemDOM(todo){
+    let todoItem = createTodoItemDOM(todo);
+    todoContainer.append(todoItem);
+}
+
+export {showCreateTodoDOM, hideCreateTodoDOM, addTodoItemDOM};

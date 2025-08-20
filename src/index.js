@@ -1,6 +1,6 @@
 import './styles.css';
 import { createTodoObject } from './todoLogic.js';
-import { showCreateTodoDOM, hideCreateTodoDOM } from './todoDOM.js';
+import { showCreateTodoDOM, hideCreateTodoDOM, addTodoItemDOM } from './todoDOM.js';
 
 // Create new todo
 let createNewTodoStatus = 'closed'
@@ -23,8 +23,11 @@ btnNewTodo.addEventListener('click', ()=>{
             dueDateInput = document.querySelector('#create-due-date').value;
             prioInput = document.querySelector('#create-priority').value;
             descInput = document.querySelector('#create-description').value;
+            console.log(dueDateInput)
             todoItem = createTodoObject(titleInput, descInput, dueDateInput, prioInput);
-            console.log(todoItem);
+            addTodoItemDOM(todoItem);
+            hideCreateTodoDOM();
+            createNewTodoStatus = 'closed';
         });
 
         btnCancel = document.querySelector('.btn-cancel');
