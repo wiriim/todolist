@@ -2,6 +2,10 @@ import './styles.css';
 import { createTodoObject } from './todoLogic.js';
 import { showCreateTodoDOM, hideCreateTodoDOM, addTodoItemDOM } from './todoDOM.js';
 
+let currProjDOM = document.querySelector('#project');
+let currProj = currProjDOM.value;
+let projTitleDOM = document.querySelector('.project-title');
+projTitleDOM.textContent = `Project: ${currProj}`;
 // Create new todo
 let createNewTodoStatus = 'closed'
 let btnNewTodo = document.querySelector('.btn-new');
