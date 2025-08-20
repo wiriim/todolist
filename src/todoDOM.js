@@ -81,7 +81,7 @@ function createTodoItemDOM(todo){
     descContainer.textContent = todo.description;
     todoItemContainer.append(headerContainer, subHeaderContainer, descContainer);
 
-
+    check.addEventListener('click', ()=>todoItemContainer.remove());
     titleDiv.addEventListener('click', ()=>{
         todoItemContainer.classList.toggle('closed');
         descContainer.classList.toggle('d-none');
