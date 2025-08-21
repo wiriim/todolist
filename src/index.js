@@ -5,9 +5,13 @@ import {
     showCreateAddProjectDOM, hideCreateAddProjectDOM, addProjectItemDOM
 } from './todoDOM.js';
 
+const User = {
+    name: document.querySelector('.user').textContent,
+    projects: [createProjectObject('Default')]
+}
+console.log(User);
 let currProjDOM = document.querySelector('#project');
 let currProjName = currProjDOM.value;
-let currProjObj = createProjectObject(currProjName);
 let projTitleDOM = document.querySelector('.project-title');
 projTitleDOM.textContent = `Project: ${currProjName}`;
 
@@ -32,9 +36,12 @@ btnNewTodo.addEventListener('click', ()=>{
             dueDateInput = document.querySelector('#create-due-date').value;
             prioInput = document.querySelector('#create-priority').value;
             descInput = document.querySelector('#create-description').value;
-            todoItem = createTodoObject(titleInput, descInput, dueDateInput, prioInput);
+            todoItem = createTodoObject(titleInput, descInput, dueDateInput, prioInput, currProjName);
             addTodoItemDOM(todoItem);
-            currProjObj.addTodo(todoItem);
+            User.projects.forEach((proj)=>{
+                if (proj.name == todoItem.project)
+                    proj.todos.push(todoItem);
+            });
             hideCreateTodoDOM();
             createNewTodoStatus = 'closed';
         });
@@ -67,6 +74,8 @@ btnNewProj.addEventListener('click', ()=>{
             projNameInput = document.querySelector('#projectName').value;
             projectItem = createProjectObject(projNameInput);
             addProjectItemDOM(projectItem);
+            User.projects.push(projectItem);
+            console.log(User)
             hideCreateAddProjectDOM();
             createNewProjStatus = 'closed';
         });
