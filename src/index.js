@@ -1,11 +1,15 @@
 import './styles.css';
-import { createTodoObject } from './todoLogic.js';
-import { showCreateTodoDOM, hideCreateTodoDOM, addTodoItemDOM } from './todoDOM.js';
+import { createTodoObject, createProjectObject } from './todoLogic.js';
+import { 
+    showCreateTodoDOM, hideCreateTodoDOM, addTodoItemDOM, 
+    showCreateAddProjectDOM, hideCreateAddProjectDOM, addProjectItemDOM
+} from './todoDOM.js';
 
 let currProjDOM = document.querySelector('#project');
 let currProj = currProjDOM.value;
 let projTitleDOM = document.querySelector('.project-title');
 projTitleDOM.textContent = `Project: ${currProj}`;
+
 // Create new todo
 let createNewTodoStatus = 'closed'
 let btnNewTodo = document.querySelector('.btn-new');
@@ -27,7 +31,6 @@ btnNewTodo.addEventListener('click', ()=>{
             dueDateInput = document.querySelector('#create-due-date').value;
             prioInput = document.querySelector('#create-priority').value;
             descInput = document.querySelector('#create-description').value;
-            console.log(dueDateInput)
             todoItem = createTodoObject(titleInput, descInput, dueDateInput, prioInput);
             addTodoItemDOM(todoItem);
             hideCreateTodoDOM();
@@ -46,3 +49,28 @@ btnNewTodo.addEventListener('click', ()=>{
     }
 });
 
+// Create new project
+let createNewProjStatus = 'closed'
+let btnNewProj = document.querySelector('.btn-new-project');
+let btnSaveProj;
+let projNameInput;
+let projectItem;
+btnNewProj.addEventListener('click', ()=>{
+    if (createNewProjStatus == 'closed'){
+        showCreateAddProjectDOM();
+        createNewProjStatus = 'opened'
+
+        btnSaveProj = document.querySelector('.btn-save-project');
+        btnSaveProj.addEventListener('click', ()=>{
+            projNameInput = document.querySelector('#projectName').value;
+            projectItem = createProjectObject(projNameInput);
+            addProjectItemDOM(projectItem);
+            hideCreateAddProjectDOM();
+            createNewProjStatus = 'closed';
+        });
+    }
+    else{
+        hideCreateAddProjectDOM();
+        createNewProjStatus = 'closed'
+    }
+});

@@ -1,4 +1,5 @@
 let todoContainer = document.querySelector('.todo-container');
+let projContainer = document.querySelector('.projects-container');
 
 function createCreateTodoDOM(){
     let container = document.createElement('div');
@@ -94,4 +95,47 @@ function addTodoItemDOM(todo){
     todoContainer.append(todoItem);
 }
 
-export {showCreateTodoDOM, hideCreateTodoDOM, addTodoItemDOM};
+function createAddProjectDOM(){
+    let container = document.createElement('div');
+    container.classList.add('add-project');
+    let label = document.createElement('label');
+    label.htmlFor = 'projectName';
+    label.textContent = 'Project Name';
+    let flexContainer = document.createElement('div');
+    flexContainer.classList.add('d-flex');
+    let input = document.createElement('input');
+    input.id = 'projectName';
+    let btn = document.createElement('button');
+    btn.classList.add('btn-save-project');
+    btn.textContent = 'Save';
+    flexContainer.append(input, btn);
+    container.append(label, flexContainer);
+    return container;
+}
+
+function showCreateAddProjectDOM(){
+    let container = createAddProjectDOM();
+    projContainer.append(container);
+}
+
+function hideCreateAddProjectDOM(){
+    let container = document.querySelector('.add-project');
+    container.remove();
+}
+
+function createProjectItemDOM(project){
+    let container = document.createElement('div');
+    container.classList.add('project');
+    container.textContent = project.name;
+    return container;
+}
+
+function addProjectItemDOM(project){
+    let projectItem = createProjectItemDOM(project);
+    projContainer.append(projectItem);
+}
+
+export {
+    showCreateTodoDOM, hideCreateTodoDOM, addTodoItemDOM, 
+    showCreateAddProjectDOM, hideCreateAddProjectDOM, addProjectItemDOM
+};
