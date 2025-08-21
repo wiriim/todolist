@@ -6,9 +6,10 @@ import {
 } from './todoDOM.js';
 
 let currProjDOM = document.querySelector('#project');
-let currProj = currProjDOM.value;
+let currProjName = currProjDOM.value;
+let currProjObj = createProjectObject(currProjName);
 let projTitleDOM = document.querySelector('.project-title');
-projTitleDOM.textContent = `Project: ${currProj}`;
+projTitleDOM.textContent = `Project: ${currProjName}`;
 
 // Create new todo
 let createNewTodoStatus = 'closed'
@@ -33,6 +34,7 @@ btnNewTodo.addEventListener('click', ()=>{
             descInput = document.querySelector('#create-description').value;
             todoItem = createTodoObject(titleInput, descInput, dueDateInput, prioInput);
             addTodoItemDOM(todoItem);
+            currProjObj.addTodo(todoItem);
             hideCreateTodoDOM();
             createNewTodoStatus = 'closed';
         });

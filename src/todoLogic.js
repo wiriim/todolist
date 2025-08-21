@@ -8,8 +8,13 @@ class todo{
 }
 
 class project{
+    todos = [];
     constructor(name){
         this.name = name;
+    }
+
+    addTodo(todo){
+        this.todos.push(todo);
     }
 }
 
