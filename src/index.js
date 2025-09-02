@@ -2,10 +2,33 @@ import './styles.css';
 import { createTodoObject, createProjectObject } from './todoLogic.js';
 import { 
     showCreateTodoDOM, hideCreateTodoDOM, addTodoItemDOM, 
-    showCreateAddProjectDOM, hideCreateAddProjectDOM, addProjectItemDOM,
-    removeTodoItemDOM
+    showCreateAddProjectDOM, hideCreateAddProjectDOM, addProjectItemDOM
 } from './todoDOM.js';
-import { User, removeUserTodo } from './user.js'
+import { User, removeUserTodo } from './user.js';
+import { getUserEditStatus, openUserEditStatus, closeUserEditStatus, createUserEditDOM, hideUserEditDOM } from './userDOM.js';
+
+// User Edit
+let userEditBtn = document.querySelector('.user-edit');
+let userDiv;
+
+userEditBtn.addEventListener('click', ()=>{
+    if (getUserEditStatus() == 'Opened'){
+        hideUserEditDOM();
+        closeUserEditStatus();
+        userDiv = document.querySelector('.user');
+        User.name = userDiv.textContent;
+    }
+    else{
+        createUserEditDOM();
+        let userEditSaveBtn = document.querySelector('.user-edit-save');
+        userEditSaveBtn.addEventListener('click', ()=>{
+            userDiv = document.querySelector('.user');
+            User.name = userDiv.textContent;
+        });
+        openUserEditStatus();
+    }
+    
+});
 
 // Current Project Management
 let currProjDOM = document.querySelector('#project');

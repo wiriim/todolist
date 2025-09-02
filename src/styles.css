@@ -44,6 +44,10 @@ body{
     letter-spacing: 1px;
 }
 
+.user-edit{
+    cursor: pointer;
+}
+
 /* Projects */
 .projects-container{
     padding: 40px 30px;

@@ -136,12 +136,7 @@ function addProjectItemDOM(project){
     projContainer.append(projectItem);
 }
 
-function removeTodoItemDOM(todo){
-    todo.remove();
-}
-
 export {
     showCreateTodoDOM, hideCreateTodoDOM, addTodoItemDOM, 
-    showCreateAddProjectDOM, hideCreateAddProjectDOM, addProjectItemDOM,
-    removeTodoItemDOM
+    showCreateAddProjectDOM, hideCreateAddProjectDOM, addProjectItemDOM
 };
