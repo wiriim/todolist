@@ -4,16 +4,44 @@ import {
     showCreateTodoDOM, hideCreateTodoDOM, addTodoItemDOM, 
     showCreateAddProjectDOM, hideCreateAddProjectDOM, addProjectItemDOM
 } from './todoDOM.js';
+import { User } from './user.js'
 
-const User = {
-    name: document.querySelector('.user').textContent,
-    projects: [createProjectObject('Default')]
-}
-console.log(User);
+// Current Project Management
 let currProjDOM = document.querySelector('#project');
 let currProjName = currProjDOM.value;
 let projTitleDOM = document.querySelector('.project-title');
 projTitleDOM.textContent = `Project: ${currProjName}`;
+refreshProjListeners();
+function refreshProjListeners(){
+    let projects = document.querySelectorAll('.project');
+    projects.forEach(proj => {
+        let newProj = proj.cloneNode(true);
+        proj.parentElement.replaceChild(newProj, proj);
+
+        newProj.addEventListener('click', (e)=>{
+            currProjName = e.target.textContent;
+            projTitleDOM.textContent = `Project: ${currProjName}`;
+        });
+    });
+}
+
+let todoContainer = document.querySelector('.todo-container');
+refreshProjTodos();
+function refreshProjTodos(){
+    let projects = document.querySelectorAll('.project');
+    projects.forEach(proj => {
+        proj.addEventListener('click', (e)=>{
+            let todos = document.querySelectorAll('.todo');
+            todos.forEach(e => e.remove());
+
+            User.projects.forEach((proj)=>{
+                if (proj.name == currProjName){
+                    proj.todos.forEach((todo)=> addTodoItemDOM(todo));
+                }
+            });
+        });
+    });
+}
 
 // Create new todo
 let createNewTodoStatus = 'closed'
@@ -75,9 +103,10 @@ btnNewProj.addEventListener('click', ()=>{
             projectItem = createProjectObject(projNameInput);
             addProjectItemDOM(projectItem);
             User.projects.push(projectItem);
-            console.log(User)
             hideCreateAddProjectDOM();
             createNewProjStatus = 'closed';
+            refreshProjListeners();
+            refreshProjTodos();
         });
     }
     else{
