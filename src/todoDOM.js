@@ -59,7 +59,7 @@ function hideCreateTodoDOM(){
 
 function createTodoItemDOM(todo){
     let todoItemContainer = document.createElement('div');
-    todoItemContainer.classList.add('todo', 'closed');
+    todoItemContainer.classList.add('todo', 'closed', todo.priority);
     let headerContainer = document.createElement('div');
     headerContainer.classList.add('todo-header');
     let check = document.createElement('div');
