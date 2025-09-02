@@ -64,6 +64,7 @@ function createTodoItemDOM(todo){
     headerContainer.classList.add('todo-header');
     let check = document.createElement('div');
     check.classList.add('todo-check');
+    check.dataset.id = todo.id;
     let titleDiv = document.createElement('div');
     titleDiv.classList.add('todo-title');
     titleDiv.textContent = todo.title;
@@ -135,7 +136,12 @@ function addProjectItemDOM(project){
     projContainer.append(projectItem);
 }
 
+function removeTodoItemDOM(todo){
+    todo.remove();
+}
+
 export {
     showCreateTodoDOM, hideCreateTodoDOM, addTodoItemDOM, 
-    showCreateAddProjectDOM, hideCreateAddProjectDOM, addProjectItemDOM
+    showCreateAddProjectDOM, hideCreateAddProjectDOM, addProjectItemDOM,
+    removeTodoItemDOM
 };

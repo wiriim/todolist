@@ -2,9 +2,10 @@ import './styles.css';
 import { createTodoObject, createProjectObject } from './todoLogic.js';
 import { 
     showCreateTodoDOM, hideCreateTodoDOM, addTodoItemDOM, 
-    showCreateAddProjectDOM, hideCreateAddProjectDOM, addProjectItemDOM
+    showCreateAddProjectDOM, hideCreateAddProjectDOM, addProjectItemDOM,
+    removeTodoItemDOM
 } from './todoDOM.js';
-import { User } from './user.js'
+import { User, removeUserTodo } from './user.js'
 
 // Current Project Management
 let currProjDOM = document.querySelector('#project');
@@ -25,7 +26,6 @@ function refreshProjListeners(){
     });
 }
 
-let todoContainer = document.querySelector('.todo-container');
 refreshProjTodos();
 function refreshProjTodos(){
     let projects = document.querySelectorAll('.project');
@@ -39,9 +39,23 @@ function refreshProjTodos(){
                     proj.todos.forEach((todo)=> addTodoItemDOM(todo));
                 }
             });
+
+            refreshTodoDelete();
         });
     });
 }
+
+// Delete existing todo
+refreshTodoDelete();
+function refreshTodoDelete(){
+    let todoChecks = document.querySelectorAll('.todo-check');
+    todoChecks.forEach((check)=>{
+        check.addEventListener('click', (e)=>{
+            removeUserTodo(e.target.dataset.id);
+        });
+    });
+}
+
 
 // Create new todo
 let createNewTodoStatus = 'closed'
@@ -53,6 +67,7 @@ let dueDateInput;
 let prioInput;
 let descInput;
 let todoItem;
+let todoId;
 btnNewTodo.addEventListener('click', ()=>{
     if (createNewTodoStatus == 'closed'){
         showCreateTodoDOM();
@@ -60,11 +75,12 @@ btnNewTodo.addEventListener('click', ()=>{
 
         btnSave = document.querySelector('.btn-save');
         btnSave.addEventListener('click', ()=>{
+            todoId = crypto.randomUUID();
             titleInput = document.querySelector('#create-title').value;
             dueDateInput = document.querySelector('#create-due-date').value;
             prioInput = document.querySelector('#create-priority').value;
             descInput = document.querySelector('#create-description').value;
-            todoItem = createTodoObject(titleInput, descInput, dueDateInput, prioInput, currProjName);
+            todoItem = createTodoObject(todoId, titleInput, descInput, dueDateInput, prioInput, currProjName);
             addTodoItemDOM(todoItem);
             User.projects.forEach((proj)=>{
                 if (proj.name == todoItem.project)
@@ -72,6 +88,7 @@ btnNewTodo.addEventListener('click', ()=>{
             });
             hideCreateTodoDOM();
             createNewTodoStatus = 'closed';
+            refreshTodoDelete();
         });
 
         btnCancel = document.querySelector('.btn-cancel');

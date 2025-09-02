@@ -1,5 +1,6 @@
 class Todo{
-    constructor(title, description, dueDate, priority, project){
+    constructor(id, title, description, dueDate, priority, project){
+        this.id = id;
         this.title = title;
         this.description = description;
         this.dueDate = dueDate;
@@ -19,8 +20,8 @@ class Project{
     }
 }
 
-function createTodoObject(title, description, dueDate, priority, project){
-    return new Todo(title, description, dueDate, priority, project);
+function createTodoObject(id, title, description, dueDate, priority, project){
+    return new Todo(id, title, description, dueDate, priority, project);
 }
 
 function createProjectObject(name){
