@@ -1,11 +1,39 @@
 import './styles.css';
-import { createTodoObject, createProjectObject } from './todoLogic.js';
+import { createTodoObject, createProjectObject, Project, Todo } from './todoLogic.js';
 import { 
     showCreateTodoDOM, hideCreateTodoDOM, addTodoItemDOM, 
     showCreateAddProjectDOM, hideCreateAddProjectDOM, addProjectItemDOM
 } from './todoDOM.js';
 import { User, removeUserTodo } from './user.js';
 import { getUserEditStatus, openUserEditStatus, closeUserEditStatus, createUserEditDOM, hideUserEditDOM } from './userDOM.js';
+import { getUserFromStorage, saveUserToStorage } from './storage.js';
+export { saveUserToStorage, getUserFromStorage } from './storage.js';
+
+// Storage Saving & Loading
+window.addEventListener('beforeunload', ()=>{
+    saveUserToStorage(User);
+});
+
+window.addEventListener('DOMContentLoaded', ()=>{
+    let existingUser = getUserFromStorage();
+    Object.assign(User, existingUser);
+    User.projects.forEach((proj)=>{
+        Object.setPrototypeOf(proj, Project.prototype);
+        addProjectItemDOM(proj);
+        refreshProjListeners();
+        proj.todos.forEach((todo)=>{
+            Object.setPrototypeOf(todo, Todo.prototype);
+            if (todo.project == currProjName){
+                addTodoItemDOM(todo);
+            }
+        });
+        refreshProjTodos();
+    });
+
+    userDiv = document.querySelector('.user');
+    userDiv.textContent = User.name;
+    console.log(User);
+});
 
 // User Edit
 let userEditBtn = document.querySelector('.user-edit');
@@ -107,7 +135,7 @@ btnNewTodo.addEventListener('click', ()=>{
             addTodoItemDOM(todoItem);
             User.projects.forEach((proj)=>{
                 if (proj.name == todoItem.project)
-                    proj.todos.push(todoItem);
+                    proj.addTodo(todoItem);
             });
             hideCreateTodoDOM();
             createNewTodoStatus = 'closed';

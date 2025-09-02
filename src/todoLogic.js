@@ -28,4 +28,4 @@ function createProjectObject(name){
     return new Project(name);
 }
 
-export { createTodoObject, createProjectObject }
+export { createTodoObject, createProjectObject, Project, Todo }
