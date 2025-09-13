@@ -1,3 +1,4 @@
+import {format} from "date-fns";
 let todoContainer = document.querySelector('.todo-container');
 let projContainer = document.querySelector('.projects-container');
 
@@ -73,7 +74,8 @@ function createTodoItemDOM(todo){
     subHeaderContainer.classList.add('todo-sub-header');
     let dueDateDiv = document.createElement('div');
     dueDateDiv.classList.add('todo-due-date');
-    dueDateDiv.textContent = todo.dueDate.replace('T', ' ');
+    console.log(todo)
+    dueDateDiv.textContent = format(todo.dueDate, "dd-MMM-yyyy k:m:s");
     let priorityDiv = document.createElement('div');
     priorityDiv.classList.add('todo-priority');
     priorityDiv.textContent = todo.priority;
