@@ -1,5 +1,7 @@
-/* Download the fonts later */
-@import url('https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100..900;1,100..900&display=swap');
+@font-face {
+    font-family: "Montserrat";
+    src: url(fonts/Montserrat.woff2);
+}
 
 *{
     margin: 0;
@@ -12,7 +14,7 @@ body{
 }
 
 .container{
-    font-family: "Roboto", sans-serif;
+    font-family: "Montserrat", sans-serif;
     display: grid;
     width: 100vw;
     min-height: 100vh;
