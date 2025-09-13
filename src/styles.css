@@ -138,7 +138,8 @@ body{
     padding: 20px;
 }
 .todo.closed{
-    height: 100px;
+    min-height: 100px;
+    height: auto;
 }
 .todo.High{
     box-shadow: 0 4px 4px 0 rgba(255, 0, 0, 0.25);
